@@ -53,8 +53,20 @@ def ValidarMenu (limInferior:int, limSuperior:int, format):
             # Muestra el mensaje de error
             print(format + 'Error: Ingrese un número entero.')
 
+#3
+def EstimarVentasMesProximo (categoria):
+
+    import pandas as pd
+    # Carga los datos de ventas
+    df = pd.read_csv('./archivosActualizadosTiendaCsv/ventasActualizadas.csv')
+
+    # Filtrar solo las columnas necesarias: id_producto y cantidad
+    df_filtrado = df[['id_producto', 'cantidad']]
+
+
+# 5
 # Función Que Genera Las Combinaciones De Productos Con Un Presupuesto
-def PosiblesComprasPorPresupuesto (presupuesto:float):
+def PosiblesComprasPorPresupuesto (presupuesto:float, format):
     
     # Función De Bakctracking Para la Generación De Las Combinaciones
     def GenerarCombinacionesProductos (combinacionActual, indice, totalActual):
@@ -109,11 +121,11 @@ def PosiblesComprasPorPresupuesto (presupuesto:float):
     
     # Mostrar resultados
     if mejoresCombinaciones:
-        print(f"Combinaciones con máximo de productos ({cantidad_max_productos} productos):")
+        print(format + f"Combinaciones con máximo de productos ({cantidad_max_productos} productos):")
         
         for i, combinacion in enumerate(mejoresCombinaciones):
             total = sum(precio for _, precio in combinacion)
-            print(f"Combinación {i + 1}: {combinacion}, Total: ${total}")
+            print(format + f"Combinación {i + 1}: {combinacion}, Total: ${total}")
     
     else:
-        print("No hay combinaciones posibles.")
+        print(format + "No hay combinaciones posibles.")

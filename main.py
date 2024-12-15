@@ -32,6 +32,10 @@ def main():
                 print(format + 'Esta opción aún no está disponible.')
             
             case 4:
+                
+                print(format + 'Esta opción aún no está disponible.')
+            
+            case 5:
 
                 while True:
                     try:
@@ -49,10 +53,7 @@ def main():
                         # Muestra el mensaje de error
                         print(format + 'Error: Ingrese un valor numérico.')
 
-                funciones.PosiblesComprasPorPresupuesto(presupuesto)
-            
-            case 5:
-                print(format + 'Esta opción aún no está disponible.')
+                funciones.PosiblesComprasPorPresupuesto(presupuesto, format)
 
             case 6:
                 print(format + 'Esta opción aún no está disponible.')
