@@ -47,7 +47,7 @@ def main():
                     except ValueError:
             
                         # Muestra el mensaje de error
-                        print(format + 'Error: Ingrese un número entero.')
+                        print(format + 'Error: Ingrese un valor numérico.')
 
                 funciones.PosiblesComprasPorPresupuesto(presupuesto)
             
@@ -70,5 +70,5 @@ def main():
             break
 
     print('\n')
-    
+
 main()

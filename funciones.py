@@ -1,4 +1,4 @@
-#Función Que Muestra El Menú Principal / Otros Menús Con Información
+# Función Que Muestra El Menú Principal / Otros Menús Con Información
 def MostrarMenu (opcion:int):
 
     #Función Que Ayuda Con La Estructura De La Tabla
@@ -33,7 +33,8 @@ def MostrarMenu (opcion:int):
     for i, item in enumerate(menuItems):
         print(EspaciosMenu(1) + item if i == 0 else EspaciosMenu(2) + item, end = ' ')
     print('\n' + ' ' * 23 + '-' * 54)
-    
+
+# Función Que Valida La Opción Ingresada Por El Usuario Para Un Menú
 def ValidarMenu (limInferior:int, limSuperior:int, format):
 
     while True:
@@ -52,9 +53,8 @@ def ValidarMenu (limInferior:int, limSuperior:int, format):
             # Muestra el mensaje de error
             print(format + 'Error: Ingrese un número entero.')
 
-
 # Función Que Genera Las Combinaciones De Productos Con Un Presupuesto
-def PosiblesComprasPorPresupuesto (presupuesto:int):
+def PosiblesComprasPorPresupuesto (presupuesto:float):
     
     # Función De Bakctracking Para la Generación De Las Combinaciones
     def GenerarCombinacionesProductos (combinacionActual, indice, totalActual):
