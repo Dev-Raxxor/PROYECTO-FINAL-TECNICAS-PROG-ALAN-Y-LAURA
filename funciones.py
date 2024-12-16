@@ -65,64 +65,64 @@ def ValidarMenu (limInferior:int, limSuperior:int, format):
             # Muestra el mensaje de error
             print(format + 'Error: Ingrese un número entero.')
 
+#1
+def MostrarResumenInicial():
+    import csv
+    clientes = []
+    productos = []
+    ventas = []
 
+    # Se leen los csv de clientes, productos y ventas, luego estos datos se guardan en 3 listas ya definidas anteriormente 
+    with open('./archivosTiendaCsv/clientes.csv', 'r') as archivoCliente:
+        lector_csv = csv.reader(archivoCliente)
+        next(lector_csv)
 
+        for cliente in lector_csv:
+            clientes.append(cliente)
 
+    with open('./archivosTiendaCsv/productos.csv', 'r') as archivoProducto:
+        lector_csv = csv.reader(archivoProducto)
+        next(lector_csv)
 
+        for producto in lector_csv:
+            productos.append(producto)
 
+    with open('./archivosActualizadosTiendaCsv/ventasActualizadas.csv', 'r') as archivoVentas:
+        lector_csv = csv.reader(archivoVentas)
+        next(lector_csv)
 
+        for venta in lector_csv:
+            ventas.append(venta)
 
+    # Contar filas en las listas para saber el total de cada uno de estos
+    cantidad_clientes = len(clientes)
+    cantidad_productos = len(productos)
+    cantidad_ventas = len(ventas)
 
+    # Mostrar el total de clientes, productos y ventas 
+    print(" ")
+    print(f'Número total de clientes: {cantidad_clientes}')
+    print(f'Número total de productos: {cantidad_productos}')
+    print(f'Número total de ventas: {cantidad_ventas}')
 
+    # Llamar a la función ObtenerMatrizVentas y obtener la matriz ventas
+    matriz_ventas = AuxiliarMostrarResumenInicial()
 
+    # Encontrar el valor más alto en la columna 3 y guardar todas las filas correspondientes
+    max_cantidad = -float('inf')
+    filas_maximas = []
+    #Se recorre la matriz ventas en la columna 3 y se va comparando para saber 
+    for venta in matriz_ventas:
+        if venta[2] > max_cantidad:
+            max_cantidad = venta[2]
+            filas_maximas = [venta]
+        elif venta[2] == max_cantidad:
+            filas_maximas.append(venta)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # Imprimir los datos en los que se encontro la cantidad más alta
+    for fila in filas_maximas:
+        print(" ")
+        print("El producto con la cantidad de ventas más altas es: ", fila[5],"\nSe encuentra en la categoría de: ", fila[4],"\nCuenta con ", fila[2]," ventas")
 
 
 # 2
