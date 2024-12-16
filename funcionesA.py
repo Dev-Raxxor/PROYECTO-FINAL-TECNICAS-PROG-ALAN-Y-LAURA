@@ -335,28 +335,97 @@ def generarGraficas (format):
     MostrarMenu(10*9)
     opcion = ValidarMenu(1, 5, format)
 
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    # Definimos la variable global 'df'
+    df = pd.read_csv('./archivosActualizadosTiendaCsv/ventasActualizadas.csv')
+    # Convertir la columna 'fecha' a tipo datetime para facilitar el manejo de fechas
+    df['fecha'] = pd.to_datetime(df['fecha'])
+
     match opcion:
 
         case 1:
             # Generar gráfica de barras para el total de ventas por mes
-            import pandas as pd
-            import matplotlib.pyplot as plt
-
             # Cargar los datos
             dfVentas = pd.read_csv('./archivosActualizadosTiendaCsv/ventasActualizadas.csv')
             dfProductos = pd.read_csv('./archivosTiendaCsv/productos.csv')
 
             # Unir las tablas de ventas y productos
-            df = dfVentas.merge(dfProductos, on='id_producto')
+            df1 = dfVentas.merge(dfProductos, on='id_producto')
 
             # Calcular las ventas totales por categoría
-            ventas_categoria = df.groupby('categoria')['cantidad'].sum().sort_values(ascending=False)
+            categoriaVentas = df1.groupby('categoria')['cantidad'].sum().sort_values(ascending=False)
 
             # Graficar
             plt.figure(figsize=(10,6))
-            ventas_categoria.plot(kind='bar', color='skyblue')
+            categoriaVentas.plot(kind='bar', color='skyblue')
             plt.title('Ventas Totales por Categoría')
             plt.xlabel('Categoría')
             plt.ylabel('Ventas Totales')
             plt.xticks(rotation=45)
+            plt.show()
+
+        case 2:  # Productos más vendidos (por id_producto)
+            productosVendidos = df.groupby('id_producto')['cantidad'].sum().sort_values(ascending=False)
+            plt.figure(figsize=(10, 6))
+            productosVendidos.plot(kind='bar', color='salmon')
+            plt.title('Productos Más Vendidos (por id_producto)')
+            plt.xlabel('ID del Producto')
+            plt.ylabel('Cantidad Vendida')
+            plt.xticks(rotation=45)
+            plt.show()
+    
+        case 3:  # Tendencia de ventas por fecha (suma de total por fecha)
+            ventasFechas = df.groupby(df['fecha'].dt.date)['total'].sum()
+            plt.figure(figsize=(10, 6))
+            ventasFechas.plot(kind='line', color='green', marker='o')
+            plt.title('Tendencias de Ventas por Fecha')
+            plt.xlabel('Fecha')
+            plt.ylabel('Ventas Totales')
+            plt.xticks(rotation=45)
+            plt.grid(True)
+            plt.show()
+
+        case 4:  # Comparativo de ventas por producto y categoria
+            # Convertir la columna 'fecha' para que solo muestre la fecha (sin hora)
+            df['fecha'] = pd.to_datetime(df['fecha']).dt.date
+            
+            # Crear DataFrame de productos 
+            dfProductos = pd.read_csv('./archivosTiendaCsv/productos.csv')
+
+            # 2. Hacer merge con productos para obtener la categoría
+            df = df.merge(dfProductos[['id_producto', 'categoria']], on='id_producto', how='left')
+
+            # 3. Crear un pivot_table con la suma de la 'cantidad' por fecha y categoría
+            compararCantidad = df.pivot_table(values='cantidad', index='fecha', columns='categoria', aggfunc='sum', fill_value=0)
+
+            # 4. Graficar los datos
+            compararCantidad.plot(kind='bar', stacked=True, figsize=(12, 6))
+            plt.title('Comparativo de Cantidad de Productos Vendidos por Categoría y Fecha')
+            plt.xlabel('Fecha')
+            plt.ylabel('Cantidad de Productos Vendidos')
+            plt.xticks(rotation=45)
+            plt.legend(title='Categoría', bbox_to_anchor=(1.05, 1), loc='upper left')
+            plt.show()
+
+        case 5:  # Línea de tendencia de ventas por fecha
+            from scipy import stats
+            import numpy as np
+
+            ventasFechas = df.groupby(df['fecha'].dt.date)['total'].sum()
+            x = np.arange(len(ventasFechas))  # Representación de la fecha como una secuencia de enteros (0, 1, 2, ...)
+            y = ventasFechas.values
+            slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
+            trend_line = slope * x + intercept
+
+            plt.figure(figsize=(10, 6))
+            plt.plot(ventasFechas.index, ventasFechas, label='Ventas Reales', color='blue')
+            plt.plot(ventasFechas.index, trend_line, label='Tendencia', color='red', linestyle='--')
+            plt.title('Tendencia de Ventas')
+            plt.xlabel('Fecha')
+            plt.ylabel('Ventas Totales')
+            plt.legend()
+            plt.xticks(rotation=45)
+            plt.grid(True)
             plt.show()
