@@ -1,5 +1,5 @@
 #Importaciones necesarias
-import os; import funciones; #import matplotlib.pyplot as plt
+import os; import funcionesA; import funcionesL
 
 # Limpiar la consola antes de mostrar cualquier cosa
 os.system('cls' if os.name == 'nt' else 'clear') 
@@ -15,45 +15,36 @@ def main():
     )
 
     while True:
+
+        # Limpiar la consola antes de mostrar cualquier cosa
+        os.system('cls' if os.name == 'nt' else 'clear') 
+
         print(' ')
-        funciones.MostrarMenu(1)
+        funcionesA.MostrarMenu(1)
         
-        opcion = funciones.ValidarMenu(1, 7, format)
+        opcion = funcionesA.ValidarMenu(1, 7, format)
     
         match opcion:
 
             case 1:
-                funciones.MostrarResumenInicial()
+
+                funcionesL.MostrarResumenInicial(format)
 
             case 2:
-                print(format + 'Esta opción aún no está disponible.')
+                
+                funcionesA.EstimarVentasMesProximo(format)
 
             case 3:
-                print(format + 'Esta opción aún no está disponible.')
+               
+                funcionesA.SimularCompra(format)
             
             case 4:
-                
-                while True:
-                    try:
-                        presupuesto = float(input(format + 'Ingrese su presupuesto: '))
-    
-                        # Verifica si la opción no está en el rango permitido
-                        if not (presupuesto >= 0.1):
-                
-                            print(format + f'Error: Opción fuera de rango. Ingrese un número mayor que 0.1')
-            
-                        else: break # Si la opción es válida, sale del bucle
-        
-                    except ValueError:
-            
-                        # Muestra el mensaje de error
-                        print(format + 'Error: Ingrese un valor numérico.')
 
-                funciones.PosiblesComprasPorPresupuesto(presupuesto, format)
+                funcionesA.PosiblesComprasPorPresupuesto(format)
             
             case 5:
 
-                funciones.AnalisisClientesProductos()
+                funcionesL.AnalisisClientesProductos(format)
 
             case 6:
                 print(format + 'Esta opción aún no está disponible.')
@@ -65,7 +56,8 @@ def main():
 
         print(format + 'Ingrese (1) para volver al menú principal o (0) para salir del programa')
         
-        opcion = funciones.ValidarMenu(0, 1, format)
+        opcion = funcionesA.ValidarMenu(0, 1, format)
+
         if opcion == 0:
             print(mensajeAdios)
             break
