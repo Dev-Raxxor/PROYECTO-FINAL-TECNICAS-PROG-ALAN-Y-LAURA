@@ -5,3 +5,7 @@ Consiste en diseñar e implementar un sistema básico de análisis y predicción
 ventas realizadas y clientes registrados. 
 
 El sistema deberá analizar los datos, integrar información de múltiples archivos y realizarestimaciones de ventas futuras y análisis de clientes, utilizando estrategias como fuerza bruta, backtracking y divide y vencerás.
+
+Nota importante: Para llevar a cabo varias funciones del programa es necesario tener instalada la librería pandas.
+Con el siguiente comando es posible instalar dicha librería desde la terminal:
+pip install pandas 
