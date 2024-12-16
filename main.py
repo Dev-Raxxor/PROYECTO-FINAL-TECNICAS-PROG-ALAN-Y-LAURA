@@ -15,7 +15,6 @@ def main():
     )
 
     while True:
-        print(' ')
         funciones.MostrarMenu(1)
         
         opcion = funciones.ValidarMenu(1, 7, format)
@@ -29,10 +28,11 @@ def main():
                 print(format + 'Esta opción aún no está disponible.')
 
             case 3:
-                print(format + 'Esta opción aún no está disponible.')
+
+                funciones.SimularCompra(format)
             
             case 4:
-                
+
                 print(format + 'Esta opción aún no está disponible.')
             
             case 5:
