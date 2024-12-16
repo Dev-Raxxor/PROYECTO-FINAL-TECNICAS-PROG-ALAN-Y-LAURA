@@ -65,6 +65,65 @@ def ValidarMenu (limInferior:int, limSuperior:int, format):
             # Muestra el mensaje de error
             print(format + 'Error: Ingrese un número entero.')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 2
 def EstimarVentasMesProximo (producto, format):
 
