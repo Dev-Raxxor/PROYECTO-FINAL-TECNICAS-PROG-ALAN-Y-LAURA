@@ -47,7 +47,8 @@ def main():
                 funcionesL.AnalisisClientesProductos(format)
 
             case 6:
-                print(format + 'Esta opción aún no está disponible.')
+                
+                funcionesA.generarGraficas(format)
 
             case 7:
                 

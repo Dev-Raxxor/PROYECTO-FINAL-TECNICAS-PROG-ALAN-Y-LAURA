@@ -47,8 +47,7 @@ def MostrarMenu (opcion:int):
             " 2. Productos más vendidos                          |",  
             " 3. Tendencias de ventas por fecha                  |",
             " 4. Comparativo de ventas por categoría             |",
-            " 5. Gráfico de tendencia de ventas                  |",
-            " 6. Volver al menú principal                        |"
+            " 5. Gráfico de tendencia de ventas                  |"
         ]
 
     #Imprimir La Tabla
@@ -329,3 +328,35 @@ def PosiblesComprasPorPresupuesto (format):
     
     else:
         print(format + "No hay combinaciones posibles.")
+
+#6
+def generarGraficas (format):
+
+    MostrarMenu(10*9)
+    opcion = ValidarMenu(1, 5, format)
+
+    match opcion:
+
+        case 1:
+            # Generar gráfica de barras para el total de ventas por mes
+            import pandas as pd
+            import matplotlib.pyplot as plt
+
+            # Cargar los datos
+            dfVentas = pd.read_csv('./archivosActualizadosTiendaCsv/ventasActualizadas.csv')
+            dfProductos = pd.read_csv('./archivosTiendaCsv/productos.csv')
+
+            # Unir las tablas de ventas y productos
+            df = dfVentas.merge(dfProductos, on='id_producto')
+
+            # Calcular las ventas totales por categoría
+            ventas_categoria = df.groupby('categoria')['total'].sum().sort_values(ascending=False)
+
+            # Graficar
+            plt.figure(figsize=(10,6))
+            ventas_categoria.plot(kind='bar', color='skyblue')
+            plt.title('Ventas Totales por Categoría')
+            plt.xlabel('Categoría')
+            plt.ylabel('Ventas Totales')
+            plt.xticks(rotation=45)
+            plt.show()
