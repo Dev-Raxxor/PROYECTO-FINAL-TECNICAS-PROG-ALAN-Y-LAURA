@@ -15,6 +15,7 @@ def main():
     )
 
     while True:
+        print(' ')
         funciones.MostrarMenu(1)
         
         opcion = funciones.ValidarMenu(1, 7, format)
@@ -22,21 +23,16 @@ def main():
         match opcion:
 
             case 1:
-                print(format + 'Esta opción aún no está disponible.')
+                funciones.MostrarResumenInicial()
 
             case 2:
                 print(format + 'Esta opción aún no está disponible.')
 
             case 3:
-
-                funciones.SimularCompra(format)
-            
-            case 4:
-
                 print(format + 'Esta opción aún no está disponible.')
             
-            case 5:
-
+            case 4:
+                
                 while True:
                     try:
                         presupuesto = float(input(format + 'Ingrese su presupuesto: '))
@@ -54,6 +50,10 @@ def main():
                         print(format + 'Error: Ingrese un valor numérico.')
 
                 funciones.PosiblesComprasPorPresupuesto(presupuesto, format)
+            
+            case 5:
+
+                funciones.AnalisisClientesProductos()
 
             case 6:
                 print(format + 'Esta opción aún no está disponible.')

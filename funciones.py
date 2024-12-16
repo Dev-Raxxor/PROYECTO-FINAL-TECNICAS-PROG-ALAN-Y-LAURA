@@ -124,6 +124,7 @@ def ValidarMenu (limInferior:int, limSuperior:int, format):
 
 
 
+
 # 2
 def EstimarVentasMesProximo (producto, format):
 
