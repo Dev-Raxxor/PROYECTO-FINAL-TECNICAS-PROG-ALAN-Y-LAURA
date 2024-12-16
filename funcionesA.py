@@ -350,7 +350,7 @@ def generarGraficas (format):
             df = dfVentas.merge(dfProductos, on='id_producto')
 
             # Calcular las ventas totales por categoría
-            ventas_categoria = df.groupby('categoria')['total'].sum().sort_values(ascending=False)
+            ventas_categoria = df.groupby('categoria')['cantidad'].sum().sort_values(ascending=False)
 
             # Graficar
             plt.figure(figsize=(10,6))
